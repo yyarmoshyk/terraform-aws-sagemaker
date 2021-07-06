@@ -10,7 +10,6 @@ resource "aws_sagemaker_model" "sagemaker_model" {
   enable_network_isolation = var.sagemaker_model_enable_network_isolation
 
   dynamic "primary_container" {
-    iterator = primary_container
     for_each = var.sagemaker_model_primary_container
     content {
       image = lookup(primary_container.value, "image", null)
@@ -22,7 +21,6 @@ resource "aws_sagemaker_model" "sagemaker_model" {
   }
 
   dynamic "container" {
-    iterator = container
     for_each = var.sagemaker_model_container
     content {
       image = lookup(container.value, "image", null)
