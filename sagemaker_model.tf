@@ -4,7 +4,7 @@
 resource "aws_sagemaker_model" "sagemaker_model" {
   count = var.enable_sagemaker_model ? 1 : 0
 
-  name               = var.sagemaker_model_name != "" ? lower(var.sagemaker_model_name) : "${lower(var.name)}-sagemaker-model-${lower(var.environment)}"
+  name               = var.sagemaker_model_name != "" ? "${lower(var.sagemaker_model_name)}-${random_integer.random.id}" : "${lower(var.name)}-sagemaker-model-${lower(var.environment)}-${random_integer.random.id}"
   execution_role_arn = var.sagemaker_model_execution_role_arn
 
   enable_network_isolation = var.sagemaker_model_enable_network_isolation
